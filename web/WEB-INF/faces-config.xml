@@ -11,14 +11,6 @@
     <navigation-rule>
             <from-view-id>/index.xhtml</from-view-id>
             <navigation-case>
-                    <from-outcome>LOGIN</from-outcome>
-                    <to-view-id>inscription.xhtml</to-view-id>
-            </navigation-case>
-            <navigation-case>
-                    <from-outcome>LIST</from-outcome>
-                    <to-view-id>/requests_list.xhtml</to-view-id>
-            </navigation-case>
-            <navigation-case>
                     <from-outcome>FALSE</from-outcome>
                     <to-view-id>/inscription.xhtml</to-view-id>
             </navigation-case>

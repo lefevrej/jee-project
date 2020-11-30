@@ -87,32 +87,54 @@ public class Hotline {
     public void setSysteme(String systeme) {
         this.systeme = systeme;
     }
+    /**
+     * Check if client is logged and return the rigth signal.
+     * @return "TRUE" if client is logged, "FALSE" otherwise
+     */
     public String isLogged(){
         ClientJpaController c = new ClientJpaController(emf);
         client=c.findClient(email);
         return email==null || client==null? "FALSE" : "TRUE";
     }
+    /**
+     * Create a new Client entity from the form informations
+     * and create the corresponding entry in database.
+     * @return "LIST" signal
+     */
     public String inscrireClient() {
         client = new Client(email, prenom, nom, telephone, false);
         ClientJpaController clientControleur = new ClientJpaController(emf);
         clientControleur.create(client);
         return "LIST";
     }
+    
+    /**
+     * Create a new Requete entity from the form informations 
+     * and create the correspondig entry in database.
+     * @return return "TRUE" if client is logged, "FALSE" otherwise
+     */
     public String sauvegardeRequete() {
         RequeteJpaController j = new RequeteJpaController(emf);
         Requete r = new Requete(email, logiciel, systeme, probleme);
         j.create(r);
-        ClientJpaController clientControleur = new ClientJpaController(emf);
-        Client c = clientControleur.findClient(email);
-        if (c != null) return "LIST";
-        else return "LOGIN";
+        return isLogged();
     }
     
+    /**
+     * Return a list of all existing Requete entry in database.
+     * @return List of all Requete from database
+     */
     public List<Requete> getRequetes(){
         RequeteJpaController j = new RequeteJpaController(emf);
         return j.findRequeteEntities();
     }
     
+    /**
+     * Return a list of all existing Requete belonging to
+     * a given user from the database.
+     * @param email - email=primary key of user
+     * @return List of all Requete from database belonging to user
+     */
     public List<Requete> getRequetesFromUser(String email){
         ClientJpaController c = new ClientJpaController(emf);
         if(c.isClientSupport(email)) return getRequetes();

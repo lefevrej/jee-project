@@ -41,6 +41,8 @@ public class Requete implements Serializable {
     public void setSysteme(String systeme) {
         this.systeme = systeme;
     }
+    //as a "probleme" can be a big issue we need more caracters
+    // because default is 250
     @Column(name = "PROBLEME", nullable = false, length = 750)
     public String getProbleme() {
         return probleme;
@@ -74,7 +76,7 @@ public class Requete implements Serializable {
         return hash;
     }
     @Override
-    public boolean equals(Object object) { // TODO: Warning -this method won't work in the case the id fields are not set
+    public boolean equals(Object object) { 
         if (!(object instanceof Requete)) {
             return false;
         }

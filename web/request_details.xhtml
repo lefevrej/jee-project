@@ -29,7 +29,7 @@ and open the template in the editor.
                     <h:outputLabel value="Probleme:" for="probleme" />
                     <h:inputText id="probleme" value="#{hotline.requete.probleme}" title="Probleme" required="true" requiredMessage="The Probleme field is required."/>
                     <h:outputLabel value="Reponse:" for="reponse" />
-                    <h:inputText id="reponse" value="#{hotline.requete.reponse}" title="Reponse" disabled="true"/>
+                    <h:inputText id="reponse" value="#{hotline.requete.reponse}" title="Reponse" disabled="true" />
                 </h:panelGrid>
                 <h:commandButton value="Valider" action="#{hotline.update()}" />
                 <h:commandButton value="Supprimer" action="#{hotline.remove()}" />
