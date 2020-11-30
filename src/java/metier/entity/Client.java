@@ -50,6 +50,16 @@ public class Client implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+    
+    public Client(){}
+    public Client(String id, String Prenom, String nom, String telephone, Boolean support) {
+        this.id = id;
+        this.Prenom = Prenom;
+        this.nom = nom;
+        this.telephone = telephone;
+        this.support = support;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

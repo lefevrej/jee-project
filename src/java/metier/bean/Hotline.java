@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package metier.bean;
 import metier.dao.RequeteJpaController;
 import metier.dao.ClientJpaController;
@@ -30,10 +25,12 @@ public class Hotline {
     private Requete requete;
     private Client client;
     
-    private String prenom, nom, email, telephone, logiciel, systeme, probleme; /*** Creates a new instance of Hotline*/
+    private String prenom, nom, email, telephone, logiciel, systeme, probleme; 
+    EntityManagerFactory emf;
     public Hotline(){
         this.requete = new Requete();
         this.client = new Client();
+        emf = Persistence.createEntityManagerFactory("finalPU");
     } 
     
     public Requete getRequete() {
@@ -91,45 +88,32 @@ public class Hotline {
         this.systeme = systeme;
     }
     public String isLogged(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
         ClientJpaController c = new ClientJpaController(emf);
         client=c.findClient(email);
         return email==null || client==null? "FALSE" : "TRUE";
     }
     public String inscrireClient() {
-        client.setId(email);
-        client.setPrenom(prenom);
-        client.setNom(nom);
-        client.setTelephone(telephone);
-        client.setSupport(false);        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
+        client = new Client(email, prenom, nom, telephone, false);
         ClientJpaController clientControleur = new ClientJpaController(emf);
         clientControleur.create(client);
-        return "ok";
+        return "LIST";
     }
     public String sauvegardeRequete() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
         RequeteJpaController j = new RequeteJpaController(emf);
-        Requete r = new Requete();
-        r.setEmail(email);
-        r.setLogiciel(logiciel);
-        r.setProbleme(probleme);
-        r.setSysteme(systeme);
+        Requete r = new Requete(email, logiciel, systeme, probleme);
         j.create(r);
         ClientJpaController clientControleur = new ClientJpaController(emf);
         Client c = clientControleur.findClient(email);
         if (c != null) return "LIST";
-        else return "client";
+        else return "LOGIN";
     }
     
     public List<Requete> getRequetes(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
         RequeteJpaController j = new RequeteJpaController(emf);
         return j.findRequeteEntities();
     }
     
     public List<Requete> getRequetesFromUser(String email){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
         ClientJpaController c = new ClientJpaController(emf);
         if(c.isClientSupport(email)) return getRequetes();
         RequeteJpaController j = new RequeteJpaController(emf);
@@ -144,7 +128,6 @@ public class Hotline {
      */
     public String showDetails(Requete requete){
         this.requete = requete;
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
         ClientJpaController c = new ClientJpaController(emf);
         if(c.isClientSupport(email)) return "SUPPORT";
         return "DETAILS";
@@ -156,7 +139,6 @@ public class Hotline {
      * @return
      */
     public String update(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
         RequeteJpaController j = new RequeteJpaController(emf);
         try {
             j.edit(this.requete);
@@ -171,7 +153,6 @@ public class Hotline {
      * @return
      */
     public String remove(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
         RequeteJpaController j = new RequeteJpaController(emf);
         try {
             j.destroy(this.requete.getId());

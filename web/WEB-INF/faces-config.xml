@@ -11,7 +11,7 @@
     <navigation-rule>
             <from-view-id>/index.xhtml</from-view-id>
             <navigation-case>
-                    <from-outcome>client</from-outcome>
+                    <from-outcome>LOGIN</from-outcome>
                     <to-view-id>inscription.xhtml</to-view-id>
             </navigation-case>
             <navigation-case>
@@ -75,7 +75,7 @@
     <navigation-rule>
             <from-view-id>/inscription.xhtml</from-view-id>
             <navigation-case>
-                    <from-outcome>ok</from-outcome>
+                    <from-outcome>LIST</from-outcome>
                     <to-view-id>/requests_list.xhtml</to-view-id>
             </navigation-case>
     </navigation-rule>

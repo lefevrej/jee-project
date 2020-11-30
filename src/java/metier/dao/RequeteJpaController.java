@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package metier.dao;
 import metier.entity.Requete;
 import java.io.Serializable;
@@ -106,6 +101,12 @@ public class RequeteJpaController implements Serializable {
             em.close();
         }
     }
+     
+    /**
+     * Return requests belonging to the user with id==email.
+     * @param email - primary key of user
+     * @return list of Requete belonging to user
+     */
     public List < Requete > findRequeteEntitiesOfUser(String email) {
         EntityManager em = getEntityManager();
         try {

@@ -10,9 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 /**
  *
  * @author josselin
@@ -62,6 +59,13 @@ public class Requete implements Serializable {
     private String email, logiciel, systeme, probleme, reponse;
     public void setId(Long id) {
         this.id = id;
+    }
+    public Requete(){}
+    public Requete(String email, String logiciel, String systeme, String probleme) {
+        this.email = email;
+        this.logiciel = logiciel;
+        this.systeme = systeme;
+        this.probleme = probleme;
     }
     @Override
     public int hashCode() {
