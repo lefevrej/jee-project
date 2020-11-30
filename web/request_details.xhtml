@@ -9,39 +9,32 @@ and open the template in the editor.
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <style type="text/css" >li.c1 { color: red }span.c1 { color : red }</style>
     <h:head>
-            <title>Support technique</title>
+        <title>Support technique</title>
+        <link rel="stylesheet" type="text/css" href="css/default.css" />
     </h:head>
     <h:body>
-        <p>
-            <h:messages />
-        </p>
-        <h:form id="f" >
-            <h:panelGrid columns="2">
-                <h:outputText value="Support technique"/>
-                <h:outputText value="Société PC maintenance" />
-                <h:outputText value="Email" />
-                <h:outputText value="#{hotline.requete.email}"/>
-                <h:outputText value="Logiciel :"/>
-                <h:selectOneMenu label="Logiciel" value="#{hotline.requete.logiciel}" >
-                    <f:selectItem itemLabel="MicrosoftExcel" itemValue="Microsoft Excel" />
-                    <f:selectItem itemLabel="MicrosoftWord" itemValue="Microsoft Word" />
-                </h:selectOneMenu>
-                <h:outputText value="Système d'exploitation :" />
-                <h:selectOneMenu  label="Système d'exploitation" value="#{hotline.requete.systeme}" >
-                    <f:selectItem itemLabel="Linux" itemValue="Linux" />
-                    <f:selectItem itemLabel="Windows" itemValue="Windows" />
-                </h:selectOneMenu>
-                <h:outputText value="Description du problème :" />
-                <h:inputTextarea label='problème' cols="40" rows="5" value="#{hotline.requete.probleme}" required="true" />                
-                <h:outputText value="Réponse du support :" />
-                <h:outputText value="#{hotline.requete.reponse}" />
-                <br/><br/>
-            </h:panelGrid>
-            <h:commandButton value="valider" action="#{hotline.update()}" />
-            <h:commandButton value="supprimer" action="#{hotline.remove()}" />
-            <h:commandButton value="retour" action="RETURN"/>
-        </h:form>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Modifier/Supprimer requete"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Id:" for="id" />
+                    <h:inputText id="id" value="#{hotline.requete.id}" title="Id" disabled="true"/>
+                    <h:outputLabel value="Email:" for="email" />
+                    <h:inputText id="email" value="#{hotline.requete.email}" title="Email" disabled="true"/>
+                    <h:outputLabel value="Logiciel:" for="logiciel" />
+                    <h:inputText id="logiciel" value="#{hotline.requete.logiciel}" title="Logiciel" />
+                    <h:outputLabel value="Systeme:" for="systeme" />
+                    <h:inputText id="systeme" value="#{hotline.requete.systeme}" title="Systeme" />
+                    <h:outputLabel value="Probleme:" for="probleme" />
+                    <h:inputText id="probleme" value="#{hotline.requete.probleme}" title="Probleme" required="true" requiredMessage="The Probleme field is required."/>
+                    <h:outputLabel value="Reponse:" for="reponse" />
+                    <h:inputText id="reponse" value="#{hotline.requete.reponse}" title="Reponse" disabled="true"/>
+                </h:panelGrid>
+                <h:commandButton value="Valider" action="#{hotline.update()}" />
+                <h:commandButton value="Supprimer" action="#{hotline.remove()}" />
+                <h:commandButton value="Retour" action="RETURN"/>
+            </h:form>
+        </f:view>
     </h:body>
 </html>

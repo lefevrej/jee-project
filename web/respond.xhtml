@@ -14,27 +14,27 @@ and open the template in the editor.
             <title>Support technique</title>
     </h:head>
     <h:body>
-        <p>
-            <h:messages />
-        </p>
-        <h:form id="f" >
-            <h:panelGrid columns="2">
-                <h:outputText value="Support technique"/>
-                <h:outputText value="Société PC maintenance" />
-                <h:outputText value="Email" />
-                <h:outputText value="#{hotline.requete.email}" />
-                <h:outputText value="Logiciel :"/>
-                <h:outputText value="#{hotline.requete.logiciel}" />
-                <h:outputText value="Système d'exploitation :" />
-                <h:outputText value="#{hotline.requete.systeme}" />
-                <h:outputText value="Description du problème :"/>
-                <h:outputText value="#{hotline.requete.probleme}" />
-                <h:outputText value="Réponse du support :"/>
-                <h:inputTextarea label='reponse' cols="75" rows="10" value="#{hotline.requete.reponse}" required="false" />
-            </h:panelGrid>
-            <h:commandButton value="valider" action="#{hotline.update()}" />
-            <h:commandButton value="supprimer" action="#{hotline.remove()}" />
-            <h:commandButton value="retour" action="RETURN"/>
-        </h:form>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Répondre/Supprimer requete"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Id:" for="id" />
+                    <h:inputText id="id" value="#{hotline.requete.id}" title="Id" disabled="true"/>
+                    <h:outputLabel value="Email:" for="email" />
+                    <h:inputText id="email" value="#{hotline.requete.email}" title="Email" disabled="true"/>
+                    <h:outputLabel value="Logiciel:" for="logiciel" />
+                    <h:inputText id="logiciel" value="#{hotline.requete.logiciel}" title="Logiciel" disabled="true"/>
+                    <h:outputLabel value="Systeme:" for="systeme" />
+                    <h:inputText id="systeme" value="#{hotline.requete.systeme}" title="Systeme" disabled="true"/>
+                    <h:outputLabel value="Probleme:" for="probleme" />
+                    <h:inputText id="probleme" value="#{hotline.requete.probleme}" title="Probleme" disabled="true"/>
+                    <h:outputLabel value="Reponse:" for="reponse" />
+                    <h:inputText id="reponse" value="#{hotline.requete.reponse}" title="Reponse"/>
+                </h:panelGrid>
+                <h:commandButton value="valider" action="#{hotline.update()}" />
+                <h:commandButton value="supprimer" action="#{hotline.remove()}" />
+                <h:commandButton value="retour" action="RETURN"/>
+            </h:form>
+        </f:view>
     </h:body>
 </html>
