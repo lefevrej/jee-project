@@ -82,7 +82,9 @@ public class Hotline {
         this.systeme = systeme;
     }
     public String isLogged(){
-        return email==null ? "FALSE" : "TRUE";
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
+        ClientJpaController c = new ClientJpaController(emf);
+        return email==null || c.findClient(email)==null? "FALSE" : "TRUE";
     }
     public String inscrireClient() {
         Client c = new Client();

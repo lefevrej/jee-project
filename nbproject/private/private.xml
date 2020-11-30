@@ -5,6 +5,7 @@
         <group>
             <file>file:/home/josselin/NetBeansProjects/final/src/conf/persistence.xml</file>
             <file>file:/home/josselin/NetBeansProjects/final/src/java/metier1/Hotline.java</file>
+            <file>file:/home/josselin/NetBeansProjects/final/src/java/metier1/ClientJpaController.java</file>
             <file>file:/home/josselin/NetBeansProjects/final/web/index.xhtml</file>
             <file>file:/home/josselin/NetBeansProjects/final/src/java/metier1/Client.java</file>
         </group>
