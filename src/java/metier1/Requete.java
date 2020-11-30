@@ -5,6 +5,7 @@
  */
 package metier1;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,8 +20,9 @@ import javax.persistence.Table;
 @Entity
 public class Requete implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id 
-    @GeneratedValue(strategy = GenerationType.AUTO) private Long id;
+    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
@@ -42,13 +44,22 @@ public class Requete implements Serializable {
     public void setSysteme(String systeme) {
         this.systeme = systeme;
     }
+    @Column(name = "PROBLEME", nullable = false, length = 750)
     public String getProbleme() {
         return probleme;
     }
     public void setProbleme(String probleme) {
         this.probleme = probleme;
     }
-    String email, logiciel, systeme, probleme;
+    @Column(name = "REPONSE", nullable = true, length = 750)
+    public String getReponse() {
+        return reponse;
+    }
+    public void setReponse(String reponse) {
+        this.reponse = reponse;
+    }
+    
+    private String email, logiciel, systeme, probleme, reponse;
     public void setId(Long id) {
         this.id = id;
     }

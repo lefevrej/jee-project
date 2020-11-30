@@ -10,7 +10,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import metier1.exceptions.NonexistentEntityException;
 
@@ -98,6 +100,20 @@ public class RequeteJpaController implements Serializable {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
             }
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    public List < Requete > findRequeteEntitiesOfUser(String email) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();            
+            CriteriaQuery cq = cb.createQuery();
+            Root<Requete> rootItem = cq.from(Requete.class);
+            Predicate predicate = cb.equal(rootItem.get("email"), email);
+            cq.where(predicate);
+            Query q = em.createQuery(cq);
             return q.getResultList();
         } finally {
             em.close();

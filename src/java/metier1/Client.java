@@ -39,7 +39,14 @@ public class Client implements Serializable {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+    public Boolean isSupport(){
+        return support;
+    }
+    public void setSupport(boolean support){
+        this.support=support;
+    }
     String Prenom, nom, telephone;
+    Boolean support;
     public void setId(String id) {
         this.id = id;
     }

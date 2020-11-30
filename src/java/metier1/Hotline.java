@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package metier1;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -24,17 +26,25 @@ import javax.persistence.Persistence;
 public class Hotline {
     @EJB
     private Requete requete;
+    private Client client;
     
-    private String prenom, nom, email, telephone, logiciel, systeme; /*** Creates a new instance of Hotline*/
-    public Hotline() {}    
+    private String prenom, nom, email, telephone, logiciel, systeme, probleme; /*** Creates a new instance of Hotline*/
+    public Hotline(){
+        requete = new Requete();
+    } 
     
+    public Requete getRequete() {
+        return requete;
+    }
+    public void setRequete(Requete requete) {
+        this.requete = requete;
+    }
     public String getProbleme() {
         return probleme;
     }
     public void setProbleme(String probleme) {
         this.probleme = probleme;
     }
-    private String probleme;
     public String getPrenom() {
         return prenom;
     }
@@ -71,12 +81,16 @@ public class Hotline {
     public void setSysteme(String systeme) {
         this.systeme = systeme;
     }
+    public String isLogged(){
+        return email==null ? "FALSE" : "TRUE";
+    }
     public String inscrireClient() {
         Client c = new Client();
         c.setId(email);
         c.setPrenom(prenom);
         c.setNom(nom);
         c.setTelephone(telephone);
+        c.setSupport(false);        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
         ClientJpaController clientControleur = new ClientJpaController(emf);
         clientControleur.create(c);
@@ -93,7 +107,7 @@ public class Hotline {
         j.create(r);
         ClientJpaController clientControleur = new ClientJpaController(emf);
         Client c = clientControleur.findClient(email);
-        if (c != null) return "ok";
+        if (c != null) return "LIST";
         else return "client";
     }
     
@@ -103,6 +117,15 @@ public class Hotline {
         return j.findRequeteEntities();
     }
     
+    public List<Requete> getRequetesFromUser(String email){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
+        ClientJpaController c = new ClientJpaController(emf);
+        if(c.isClientSupport(email)) return getRequetes();
+        RequeteJpaController j = new RequeteJpaController(emf);
+        return j.findRequeteEntitiesOfUser(email);
+    }
+    
+    
     /**
      * Action handler - user selects a request record from the list
      * (data table) to view/edit
@@ -111,6 +134,9 @@ public class Hotline {
      */
     public String showDetails(Requete requete){
         this.requete = requete;
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
+        ClientJpaController c = new ClientJpaController(emf);
+        if(c.isClientSupport(email)) return "SUPPORT";
         return "DETAILS";
     }
     
@@ -122,15 +148,26 @@ public class Hotline {
     public String update(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
         RequeteJpaController j = new RequeteJpaController(emf);
-        this.requete.setEmail(email);
-        this.requete.setLogiciel(logiciel);
-        this.requete.setProbleme(probleme);
-        this.requete.setSysteme(systeme);
         try {
             j.edit(this.requete);
         } catch (Exception ex) {
             Logger.getLogger(Hotline.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "SAVED";
+    }
+    
+        /**
+     * Action handler - remove the request object from the database
+     * @return
+     */
+    public String remove(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("finalPU");
+        RequeteJpaController j = new RequeteJpaController(emf);
+        try {
+            j.destroy(this.requete.getId());
+        } catch (Exception ex) {
+            Logger.getLogger(Hotline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "REMOVED";
     }
 }

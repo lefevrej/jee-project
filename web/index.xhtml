@@ -29,8 +29,9 @@
                     <f:selectItem itemLabel="Windows" itemValue="Windows" />
                 </h:selectOneMenu>
                 <h:outputText value="Description du problème :"/>
-                <h:inputTextarea label='problème' cols="40" rows="5" value="#{hotline.probleme}" required="true" />
-                <h:commandButton value="valider" action="#{hotline.sauvegardeRequete()}" />
+                <h:inputTextarea label='problème' cols="40" rows="5" value="#{hotline.probleme}" required="false" />
+                <h:commandButton value="valider" action="#{hotline.sauvegardeRequete()}" />                
+                <h:commandButton value="Voir requetes" action="#{hotline.isLogged()}"/>
             </h:panelGrid>
         </h:form>
     </h:body>

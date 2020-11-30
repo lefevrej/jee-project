@@ -22,21 +22,25 @@ and open the template in the editor.
                 <h:outputText value="Support technique"/>
                 <h:outputText value="Société PC maintenance" />
                 <h:outputText value="Email" />
-                <h:inputText label="Email" id="fmail" value="#{hotline.email}" required="true" />
+                <h:outputText value="#{hotline.requete.email}"/>
                 <h:outputText value="Logiciel :"/>
-                <h:selectOneMenu label="Logiciel" value="#{hotline.logiciel}" >
+                <h:selectOneMenu label="Logiciel" value="#{hotline.requete.logiciel}" >
                     <f:selectItem itemLabel="MicrosoftExcel" itemValue="Microsoft Excel" />
                     <f:selectItem itemLabel="MicrosoftWord" itemValue="Microsoft Word" />
                 </h:selectOneMenu>
                 <h:outputText value="Système d'exploitation :" />
-                <h:selectOneMenu  label="Système d'exploitation" value="#{hotline.systeme}" >
+                <h:selectOneMenu  label="Système d'exploitation" value="#{hotline.requete.systeme}" >
                     <f:selectItem itemLabel="Linux" itemValue="Linux" />
                     <f:selectItem itemLabel="Windows" itemValue="Windows" />
                 </h:selectOneMenu>
-                <h:outputText value="Description du problème :"/>
-                <h:inputTextarea label='problème' cols="40" rows="5" value="#{hotline.probleme}" required="true" />
+                <h:outputText value="Description du problème :" />
+                <h:inputTextarea label='problème' cols="40" rows="5" value="#{hotline.requete.probleme}" required="true" />                
+                <h:outputText value="Réponse du support :" />
+                <h:outputText value="#{hotline.requete.reponse}" />
+                <br/><br/>
             </h:panelGrid>
             <h:commandButton value="valider" action="#{hotline.update()}" />
+            <h:commandButton value="supprimer" action="#{hotline.remove()}" />
             <h:commandButton value="retour" action="RETURN"/>
         </h:form>
     </h:body>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <style type="text/css" >li.c1 { color: red }span.c1 { color : red }</style>
+    <h:head>
+            <title>Support technique</title>
+    </h:head>
+    <h:body>
+        <p>
+            <h:messages />
+        </p>
+        <h:form id="f" >
+            <h:panelGrid columns="2">
+                <h:outputText value="Support technique"/>
+                <h:outputText value="Société PC maintenance" />
+                <h:outputText value="Email" />
+                <h:outputText value="#{hotline.requete.email}" />
+                <h:outputText value="Logiciel :"/>
+                <h:outputText value="#{hotline.requete.logiciel}" />
+                <h:outputText value="Système d'exploitation :" />
+                <h:outputText value="#{hotline.requete.systeme}" />
+                <h:outputText value="Description du problème :"/>
+                <h:outputText value="#{hotline.requete.probleme}" />
+                <h:outputText value="Réponse du support :"/>
+                <h:inputTextarea label='reponse' cols="75" rows="10" value="#{hotline.requete.reponse}" required="false" />
+            </h:panelGrid>
+            <h:commandButton value="valider" action="#{hotline.update()}" />
+            <h:commandButton value="supprimer" action="#{hotline.remove()}" />
+            <h:commandButton value="retour" action="RETURN"/>
+        </h:form>
+    </h:body>
+</html>

@@ -122,4 +122,15 @@ public class ClientJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public boolean isClientSupport(String id){
+        boolean isSupport = false;
+        EntityManager em = getEntityManager();
+        try {
+            isSupport = em.find(Client.class, id).support;
+        }finally {
+            em.close();
+        }
+        return isSupport;
+    }
 }

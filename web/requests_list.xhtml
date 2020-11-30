@@ -18,7 +18,7 @@ and open the template in the editor.
             <h1><h:outputText value="Requests Listing"/></h1>
             <h:panelGrid cellspacing="3">
             <h:form>
-            <h:dataTable value="#{hotline.requetes}" var="item"
+            <h:dataTable value="#{hotline.getRequetesFromUser(hotline.email)}" var="item"
                          border="1" cellspacing="0" cellpadding="1"
                          rowClasses="tab_odd_row,tab_even_row">
                 <h:column>
@@ -55,6 +55,7 @@ and open the template in the editor.
                     <h:outputText value="#{item.probleme}"/>
                 </h:column>
             </h:dataTable>
+            <h:commandButton value="Nouvelle requete" action="NEW"/>
             </h:form>
             </h:panelGrid>
         </body>
